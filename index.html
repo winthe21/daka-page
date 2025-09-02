@@ -3,684 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>城市探索打卡集章活动</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    
-    <!-- 配置Tailwind自定义颜色和字体 -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3B82F6',
-                        secondary: '#EC4899',
-                        accent: '#F59E0B',
-                        dark: '#1E293B',
-                        light: '#F8FAFC'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
-    
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .stamp-shadow {
-                filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
-            }
-            .stamp-glow {
-                animation: glow 1.5s ease-in-out infinite alternate;
-            }
-            .float {
-                animation: float 3s ease-in-out infinite;
-            }
-            .pulse-slow {
-                animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-            }
+    <title>GitHub Pages问题解决方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        @keyframes glow {
-            from {
-                filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
-            }
-            to {
-                filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.8));
-            }
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
         }
         
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            padding: 20px;
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 1000px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid #2575fc;
+            color: #2575fc;
+            background: white;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .problem {
+            background: #fff4f4;
+            border-left: 4px solid #ff6b6b;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        
+        .solution {
+            background: #f0f9ff;
+            border-left: 4px solid #4dabf7;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: #3498db;
+            margin-bottom: 12px;
+            font-size: 1.4rem;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .code {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Consolas', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        
+        .screenshot {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .screenshot img {
+            max-width: 100%;
+            border: 1px solid #dee2e6;
+        }
+        
+        .caption {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 10px;
+        }
+        
+        .important {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-left: 4px solid #fdcb6e;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        
+        .button {
+            display: inline-block;
+            background: #2575fc;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .button:hover {
+            background: #1a60c0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .checklist {
+            margin: 20px 0;
+        }
+        
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .check-icon {
+            color: #38b2ac;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            width: 100%;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
             }
-            50% {
-                transform: translateY(-10px);
+            
+            .content {
+                padding: 20px;
             }
-            100% {
-                transform: translateY(0px);
+            
+            h1 {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
-<body class="bg-gradient-to-b from-blue-50 to-indigo-50 min-h-screen font-sans text-dark">
-    <!-- 顶部导航栏 -->
-    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <i class="fa fa-map-marker text-primary text-2xl"></i>
-                <h1 class="text-xl font-bold text-primary">城市探索家</h1>
-            </div>
-            <div class="flex items-center space-x-4">
-                <button id="profileBtn" class="text-gray-600 hover:text-primary transition-colors">
-                    <i class="fa fa-user-circle-o text-xl"></i>
-                </button>
-                <button id="helpBtn" class="text-gray-600 hover:text-primary transition-colors">
-                    <i class="fa fa-question-circle-o text-xl"></i>
-                </button>
-            </div>
+<body>
+    <div class="header">
+        <h1>GitHub Pages问题解决方案</h1>
+        <p class="subtitle">解决网页显示代码而非渲染内容的问题</p>
+    </div>
+    
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab(0)">问题分析</div>
+            <div class="tab" onclick="switchTab(1)">解决方案</div>
+            <div class="tab" onclick="switchTab(2)">预防措施</div>
+            <div class="tab" onclick="switchTab(3)">快速修复</div>
         </div>
-    </header>
-
-    <main class="container mx-auto px-4 py-6">
-        <!-- 用户位置信息 -->
-        <section id="locationSection" class="bg-white rounded-xl shadow-md p-4 mb-6 transform transition-all duration-300">
-            <div class="flex justify-between items-center mb-3">
-                <h2 class="text-lg font-semibold text-gray-800">当前位置</h2>
-                <button id="refreshLocation" class="text-primary text-sm flex items-center hover:underline">
-                    <i class="fa fa-refresh mr-1"></i> 刷新
-                </button>
-            </div>
-            <div id="locationStatus" class="flex items-center justify-center py-6 text-gray-500">
-                <i class="fa fa-spinner fa-spin mr-2"></i>
-                <span>正在获取您的位置...</span>
-            </div>
-            <div id="locationInfo" class="hidden">
-                <div class="flex items-start">
-                    <i class="fa fa-map-marker text-secondary mt-1 mr-3 text-lg"></i>
-                    <div>
-                        <p id="locationAddress" class="font-medium"></p>
-                        <p id="locationDistance" class="text-sm text-gray-500 mt-1"></p>
+        
+        <div class="content">
+            <!-- 问题分析 -->
+            <div class="content-section active">
+                <h2>为什么GitHub Pages显示代码而不是网页？</h2>
+                
+                <div class="problem">
+                    <h3>常见原因</h3>
+                    <p>当GitHub Pages显示HTML源代码而不是渲染的网页时，通常是由以下原因造成的：</p>
+                    
+                    <div class="checklist">
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>文件没有命名为<strong>index.html</strong>（GitHub Pages的默认文件）</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>文件没有放在仓库的根目录</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>GitHub Pages设置不正确</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>URL访问方式错误</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>HTML文件语法错误</span>
+                        </div>
                     </div>
                 </div>
-                <button id="checkInBtn" class="mt-4 w-full bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-md hover:shadow-lg">
-                    <i class="fa fa-check-circle mr-2"></i>在此地点打卡
-                </button>
-            </div>
-        </section>
-
-        <!-- 附近可打卡地点 -->
-        <section class="mb-8">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-bold text-gray-800">附近可打卡地点</h2>
-                <span id="nearbyCount" class="bg-primary/10 text-primary text-sm px-2 py-1 rounded-full"></span>
-            </div>
-            
-            <div id="nearbyPlaces" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- 地点卡片会通过JS动态生成 -->
-                <div class="animate-pulse bg-white rounded-xl shadow-sm p-4">
-                    <div class="h-4 bg-gray-200 rounded w-3/4 mb-3"></div>
-                    <div class="h-3 bg-gray-200 rounded w-1/2 mb-4"></div>
-                    <div class="h-8 bg-gray-200 rounded w-full"></div>
-                </div>
-                <div class="animate-pulse bg-white rounded-xl shadow-sm p-4">
-                    <div class="h-4 bg-gray-200 rounded w-3/4 mb-3"></div>
-                    <div class="h-3 bg-gray-200 rounded w-1/2 mb-4"></div>
-                    <div class="h-8 bg-gray-200 rounded w-full"></div>
+                
+                <div class="solution">
+                    <h3>如何判断问题所在</h3>
+                    <p>要确定问题的具体原因，请检查以下几点：</p>
+                    <ol>
+                        <li>访问的URL是否正确（应该是https://用户名.github.io/仓库名/）</li>
+                        <li>GitHub仓库中的文件结构</li>
+                        <li>GitHub Pages的设置（Settings → Pages）</li>
+                        <li>HTML文件是否包含正确的DOCTYPE声明</li>
+                    </ol>
                 </div>
             </div>
-        </section>
-
-        <!-- 集章展示区 -->
-        <section class="mb-8">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-bold text-gray-800">我的徽章</h2>
-                <span id="stampProgress" class="text-sm text-gray-500"></span>
-            </div>
             
-            <div id="stampCollection" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
-                <!-- 徽章会通过JS动态生成 -->
-            </div>
-        </section>
-
-        <!-- 打卡历史 -->
-        <section class="mb-8">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">打卡历史</h2>
-            
-            <div id="checkInHistory" class="space-y-3">
-                <!-- 历史记录会通过JS动态生成 -->
-                <div class="bg-white rounded-xl shadow-sm p-4 text-center text-gray-500">
-                    暂无打卡记录，快去打卡吧！
+            <!-- 解决方案 -->
+            <div class="content-section">
+                <h2>解决GitHub Pages显示代码的问题</h2>
+                
+                <div class="solution">
+                    <h3>方法一：重命名文件为index.html</h3>
+                    <p>GitHub Pages默认寻找名为<strong>index.html</strong>的文件作为主页。</p>
+                    
+                    <div class="code">
+                        # 将您的HTML文件重命名为index.html<br>
+                        mv check-in-page.html index.html
+                    </div>
+                    
+                    <p>然后重新上传到GitHub仓库的根目录。</p>
+                </div>
+                
+                <div class="solution">
+                    <h3>方法二：正确配置GitHub Pages</h3>
+                    <ol>
+                        <li>进入您的GitHub仓库</li>
+                        <li>点击"Settings"选项卡</li>
+                        <li>在左侧菜单中选择"Pages"</li>
+                        <li>在"Source"部分，选择您的分支（通常是main或master）</li>
+                        <li>选择文件夹为"/(root)"</li>
+                        <li>点击"Save"</li>
+                    </ol>
+                    
+                    <div class="screenshot">
+                        <div class="caption">GitHub Pages设置示意图</div>
+                        <div style="background:#f0f0f0; padding:40px; text-align:center; border-radius:5px;">
+                            [GitHub Pages设置截图位置]
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="solution">
+                    <h3>方法三：使用正确的URL访问</h3>
+                    <p>如果您的文件不是index.html，您需要使用完整的URL路径：</p>
+                    
+                    <div class="code">
+                        # 如果文件名为mypage.html<br>
+                        https://用户名.github.io/仓库名/mypage.html
+                    </div>
+                    
+                    <p>注意URL是区分大小写的，请确保大小写匹配。</p>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <!-- 底部导航 -->
-    <footer class="bg-white border-t border-gray-200 py-4 sticky bottom-0 z-40">
-        <div class="container mx-auto px-6">
-            <div class="flex justify-around">
-                <a href="#" class="flex flex-col items-center text-primary">
-                    <i class="fa fa-home text-xl"></i>
-                    <span class="text-xs mt-1">首页</span>
-                </a>
-                <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary transition-colors">
-                    <i class="fa fa-compass text-xl"></i>
-                    <span class="text-xs mt-1">探索</span>
-                </a>
-                <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary transition-colors">
-                    <i class="fa fa-trophy text-xl"></i>
-                    <span class="text-xs mt-1">排行榜</span>
-                </a>
-                <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary transition-colors">
-                    <i class="fa fa-info-circle text-xl"></i>
-                    <span class="text-xs mt-1">关于</span>
-                </a>
+            
+            <!-- 预防措施 -->
+            <div class="content-section">
+                <h2>预防GitHub Pages问题的措施</h2>
+                
+                <div class="solution">
+                    <h3>最佳实践</h3>
+                    
+                    <div class="checklist">
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>始终将主页面文件命名为<strong>index.html</strong></span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>将HTML文件放在仓库的根目录</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>确保HTML文件包含正确的DOCTYPE声明</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>使用相对路径引用CSS、JS和图像文件</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>在推送更改后等待几分钟让GitHub Pages构建完成</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="important">
+                    <h3>重要提示</h3>
+                    <p>GitHub Pages构建可能需要几分钟时间。更改设置或上传新文件后，请耐心等待1-5分钟，然后刷新页面查看结果。</p>
+                </div>
+            </div>
+            
+            <!-- 快速修复 -->
+            <div class="content-section">
+                <h2>快速修复指南</h2>
+                
+                <div class="solution">
+                    <h3>五分钟修复步骤</h3>
+                    <ol>
+                        <li>将您的HTML文件重命名为<strong>index.html</strong></li>
+                        <li>确保文件在仓库的根目录（不在任何文件夹内）</li>
+                        <li>上传到GitHub仓库</li>
+                        <li>进入仓库Settings → Pages</li>
+                        <li>选择分支（main或master）和根目录</li>
+                        <li>保存设置并等待2分钟</li>
+                        <li>访问https://用户名.github.io/仓库名/</li>
+                    </ol>
+                    
+                    <button class="button" onclick="switchTab(1)">查看详细解决方案</button>
+                </div>
+                
+                <div class="solution">
+                    <h3>检查清单</h3>
+                    <p>如果问题仍然存在，请检查以下各项：</p>
+                    
+                    <div class="checklist">
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>HTML文件以<code>&lt;!DOCTYPE html&gt;</code>开头</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>GitHub Pages设置正确（分支和根目录）</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>URL中没有拼写错误</span>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>等待了足够的时间让GitHub构建页面</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 GitHub Pages问题解决方案 | 需要更多帮助？查看GitHub官方文档</p>
     </footer>
 
-    <!-- 打卡成功弹窗 -->
-    <div id="successModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-2xl p-6 w-5/6 max-w-md transform transition-all">
-            <div class="text-center">
-                <div class="w-20 h-20 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
-                    <i class="fa fa-check text-4xl text-green-500"></i>
-                </div>
-                <h3 class="text-xl font-bold text-gray-800 mb-2">打卡成功！</h3>
-                <p id="successMessage" class="text-gray-600 mb-6">您已成功在[地点名称]打卡，获得一枚新徽章！</p>
-                <div id="newStampPreview" class="mb-6 flex justify-center">
-                    <!-- 新获得的徽章预览 -->
-                </div>
-                <button id="closeSuccessModal" class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-lg transition-all w-full">
-                    继续探索
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 帮助弹窗 -->
-    <div id="helpModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-2xl p-6 w-5/6 max-w-md max-h-[80vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-gray-800">活动帮助</h3>
-                <button id="closeHelpModal" class="text-gray-500 hover:text-gray-800">
-                    <i class="fa fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="space-y-4 text-gray-600">
-                <div>
-                    <h4 class="font-semibold text-gray-800 mb-1">如何参与打卡？</h4>
-                    <p>1. 允许获取您的位置信息</p>
-                    <p>2. 在可打卡地点范围内点击"在此地点打卡"</p>
-                    <p>3. 成功打卡后将获得对应徽章</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-800 mb-1">集齐徽章有什么奖励？</h4>
-                    <p>集齐所有徽章可获得精美礼品一份，详情请关注公众号后续通知。</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-800 mb-1">为什么无法打卡？</h4>
-                    <p>请确保您在打卡地点附近（通常为500米范围内），并已授予位置权限。</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // 模拟数据 - 可打卡地点
-        const checkInPlaces = [
-            { id: 1, name: "城市博物馆", address: "文化东路123号", lat: 39.9087, lng: 116.3975, stamp: "🏛️" },
-            { id: 2, name: "中央公园", address: "绿化大道45号", lat: 39.9187, lng: 116.4075, stamp: "🌳" },
-            { id: 3, name: "科技中心", address: "创新路789号", lat: 39.9287, lng: 116.4175, stamp: "🔬" },
-            { id: 4, name: "艺术画廊", address: "美学街67号", lat: 39.8987, lng: 116.4275, stamp: "🎨" },
-            { id: 5, name: "历史古迹", address: "古城路88号", lat: 39.8887, lng: 116.4075, stamp: "🏯" },
-            { id: 6, name: "滨江公园", address: "江滨路101号", lat: 39.9087, lng: 116.3875, stamp: "🚤" },
-            { id: 7, name: "植物园", address: "园林路23号", lat: 39.9387, lng: 116.3975, stamp: "🌺" },
-            { id: 8, name: "图书馆", address: "知识路56号", lat: 39.9187, lng: 116.4375, stamp: "📚" }
-        ];
-
-        // 应用状态
-        const appState = {
-            userLocation: null,
-            checkedInPlaces: JSON.parse(localStorage.getItem('checkedInPlaces')) || [],
-            nearbyPlaces: []
-        };
-
-        // DOM 元素
-        const elements = {
-            locationStatus: document.getElementById('locationStatus'),
-            locationInfo: document.getElementById('locationInfo'),
-            locationAddress: document.getElementById('locationAddress'),
-            locationDistance: document.getElementById('locationDistance'),
-            checkInBtn: document.getElementById('checkInBtn'),
-            refreshLocation: document.getElementById('refreshLocation'),
-            nearbyPlaces: document.getElementById('nearbyPlaces'),
-            nearbyCount: document.getElementById('nearbyCount'),
-            stampCollection: document.getElementById('stampCollection'),
-            stampProgress: document.getElementById('stampProgress'),
-            checkInHistory: document.getElementById('checkInHistory'),
-            successModal: document.getElementById('successModal'),
-            successMessage: document.getElementById('successMessage'),
-            newStampPreview: document.getElementById('newStampPreview'),
-            closeSuccessModal: document.getElementById('closeSuccessModal'),
-            helpBtn: document.getElementById('helpBtn'),
-            helpModal: document.getElementById('helpModal'),
-            closeHelpModal: document.getElementById('closeHelpModal')
-        };
-
-        // 初始化应用
-        function initApp() {
-            // 获取用户位置
-            getUserLocation();
-            
-            // 渲染徽章收集
-            renderStampCollection();
-            
-            // 渲染打卡历史
-            renderCheckInHistory();
-            
-            // 绑定事件监听
-            bindEvents();
-        }
-
-        // 获取用户位置
-        function getUserLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        appState.userLocation = {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude
-                        };
-                        updateLocationInfo();
-                        findNearbyPlaces();
-                    },
-                    (error) => {
-                        console.error("获取位置失败:", error);
-                        elements.locationStatus.innerHTML = `
-                            <i class="fa fa-exclamation-triangle text-amber-500 mr-2"></i>
-                            <span>无法获取位置，请允许位置权限</span>
-                        `;
-                        
-                        // 显示手动选择位置的选项
-                        const manualBtn = document.createElement('button');
-                        manualBtn.className = 'mt-3 text-primary hover:underline text-sm';
-                        manualBtn.innerHTML = '<i class="fa fa-map mr-1"></i> 手动选择位置';
-                        manualBtn.onclick = showManualLocationSelector;
-                        elements.locationStatus.appendChild(manualBtn);
-                    }
-                );
-            } else {
-                elements.locationStatus.innerHTML = `
-                    <i class="fa fa-exclamation-triangle text-amber-500 mr-2"></i>
-                    <span>您的浏览器不支持位置服务</span>
-                `;
-            }
-        }
-
-        // 显示手动选择位置
-        function showManualLocationSelector() {
-            // 创建一个简单的位置选择器
-            elements.locationStatus.innerHTML = `
-                <div class="w-full">
-                    <p class="mb-2 text-sm text-gray-600">请选择您的位置：</p>
-                    <select id="manualLocation" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
-                        <option value="">-- 选择地点 --</option>
-                        ${checkInPlaces.map(place => `
-                            <option value="${place.id}">${place.name} (${place.address})</option>
-                        `).join('')}
-                    </select>
-                </div>
-            `;
-            
-            document.getElementById('manualLocation').addEventListener('change', function(e) {
-                if (e.target.value) {
-                    const selectedPlace = checkInPlaces.find(p => p.id == e.target.value);
-                    if (selectedPlace) {
-                        appState.userLocation = {
-                            lat: selectedPlace.lat,
-                            lng: selectedPlace.lng,
-                            manual: true
-                        };
-                        updateLocationInfo(selectedPlace);
-                        findNearbyPlaces();
-                    }
-                }
-            });
-        }
-
-        // 更新位置信息显示
-        function updateLocationInfo(manualPlace = null) {
-            if (manualPlace) {
-                elements.locationAddress.textContent = manualPlace.name;
-                elements.locationDistance.textContent = `手动选择的位置`;
-                elements.checkInBtn.dataset.placeId = manualPlace.id;
-            } else {
-                // 这里应该调用逆地理编码API获取实际地址
-                // 简化处理，找到最近的地点
-                const nearestPlace = findNearestPlace();
-                if (nearestPlace) {
-                    const distance = calculateDistance(
-                        appState.userLocation.lat, 
-                        appState.userLocation.lng, 
-                        nearestPlace.lat, 
-                        nearestPlace.lng
-                    );
-                    
-                    elements.locationAddress.textContent = nearestPlace.name;
-                    elements.locationDistance.textContent = `距离您约 ${distance.toFixed(0)} 米`;
-                    elements.checkInBtn.dataset.placeId = nearestPlace.id;
+        function switchTab(tabIndex) {
+            // 更新标签页状态
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach((tab, index) => {
+                if (index === tabIndex) {
+                    tab.classList.add('active');
                 } else {
-                    elements.locationAddress.textContent = `纬度: ${appState.userLocation.lat.toFixed(6)}, 经度: ${appState.userLocation.lng.toFixed(6)}`;
-                    elements.locationDistance.textContent = `未找到附近的打卡点`;
-                    elements.checkInBtn.disabled = true;
-                    elements.checkInBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                    elements.checkInBtn.innerHTML = '<i class="fa fa-exclamation-circle mr-2"></i>附近无打卡点';
-                }
-            }
-            
-            elements.locationStatus.classList.add('hidden');
-            elements.locationInfo.classList.remove('hidden');
-        }
-
-        // 计算两点之间的距离（米）
-        function calculateDistance(lat1, lon1, lat2, lon2) {
-            const R = 6371e3; // 地球半径（米）
-            const φ1 = lat1 * Math.PI / 180;
-            const φ2 = lat2 * Math.PI / 180;
-            const Δφ = (lat2 - lat1) * Math.PI / 180;
-            const Δλ = (lon2 - lon1) * Math.PI / 180;
-
-            const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-                      Math.cos(φ1) * Math.cos(φ2) *
-                      Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-            return R * c; // 距离（米）
-        }
-
-        // 查找最近的地点
-        function findNearestPlace() {
-            if (!appState.userLocation) return null;
-            
-            let nearestPlace = null;
-            let minDistance = Infinity;
-            
-            checkInPlaces.forEach(place => {
-                const distance = calculateDistance(
-                    appState.userLocation.lat, 
-                    appState.userLocation.lng, 
-                    place.lat, 
-                    place.lng
-                );
-                
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    nearestPlace = { ...place, distance };
+                    tab.classList.remove('active');
                 }
             });
             
-            return nearestPlace;
-        }
-
-        // 查找附近的地点（500米内）
-        function findNearbyPlaces() {
-            if (!appState.userLocation) return;
-            
-            appState.nearbyPlaces = checkInPlaces
-                .map(place => {
-                    const distance = calculateDistance(
-                        appState.userLocation.lat, 
-                        appState.userLocation.lng, 
-                        place.lat, 
-                        place.lng
-                    );
-                    return { ...place, distance };
-                })
-                .filter(place => place.distance <= 1000) // 1000米范围内
-                .sort((a, b) => a.distance - b.distance);
-            
-            renderNearbyPlaces();
-        }
-
-        // 渲染附近的地点
-        function renderNearbyPlaces() {
-            elements.nearbyCount.textContent = `${appState.nearbyPlaces.length}个地点`;
-            
-            if (appState.nearbyPlaces.length === 0) {
-                elements.nearbyPlaces.innerHTML = `
-                    <div class="col-span-full bg-white rounded-xl shadow-sm p-6 text-center text-gray-500">
-                        <i class="fa fa-map-o text-3xl mb-3 text-gray-300"></i>
-                        <p>附近1公里内没有可打卡的地点</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            elements.nearbyPlaces.innerHTML = appState.nearbyPlaces.map(place => {
-                const isCheckedIn = appState.checkedInPlaces.some(p => p.id === place.id);
-                return `
-                    <div class="bg-white rounded-xl shadow-sm p-4 transform transition-all hover:shadow-md">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-semibold">${place.name}</h3>
-                            ${isCheckedIn ? 
-                                '<span class="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">已打卡</span>' : 
-                                '<span class="bg-primary/10 text-primary text-xs px-2 py-0.5 rounded-full">可打卡</span>'
-                            }
-                        </div>
-                        <p class="text-sm text-gray-500 mt-1 mb-3">${place.address}</p>
-                        <p class="text-sm text-gray-600 mb-4"><i class="fa fa-distance text-gray-400 mr-1"></i> 距离: ${place.distance.toFixed(0)} 米</p>
-                        <button 
-                            class="w-full ${isCheckedIn ? 
-                                'bg-gray-200 text-gray-500 cursor-not-allowed' : 
-                                'bg-primary hover:bg-primary/90 text-white hover:shadow transition-all'
-                            } py-2 px-4 rounded-lg text-sm"
-                            ${isCheckedIn ? 'disabled' : ''}
-                            data-place-id="${place.id}"
-                            ${!isCheckedIn ? 'onclick="checkInPlace(' + place.id + ')"' : ''}
-                        >
-                            ${isCheckedIn ? 
-                                '<i class="fa fa-check-circle mr-1"></i> 已打卡' : 
-                                '<i class="fa fa-map-marker mr-1"></i> 去打卡'
-                            }
-                        </button>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // 渲染徽章收集
-        function renderStampCollection() {
-            elements.stampCollection.innerHTML = checkInPlaces.map(place => {
-                const isCheckedIn = appState.checkedInPlaces.some(p => p.id === place.id);
-                return `
-                    <div class="flex flex-col items-center">
-                        <div class="w-16 h-16 rounded-full flex items-center justify-center text-3xl mb-2 
-                            ${isCheckedIn ? 'bg-primary/10 text-primary stamp-shadow' : 'bg-gray-100 text-gray-300'}
-                            transition-all duration-300 transform ${isCheckedIn ? 'scale-100' : 'hover:scale-105'}">
-                            ${place.stamp}
-                        </div>
-                        <span class="text-xs text-center text-gray-600">${place.name}</span>
-                    </div>
-                `;
-            }).join('');
-            
-            // 更新进度
-            const progress = appState.checkedInPlaces.length;
-            const total = checkInPlaces.length;
-            elements.stampProgress.textContent = `${progress}/${total} 枚徽章`;
-        }
-
-        // 渲染打卡历史
-        function renderCheckInHistory() {
-            if (appState.checkedInPlaces.length === 0) {
-                elements.checkInHistory.innerHTML = `
-                    <div class="bg-white rounded-xl shadow-sm p-4 text-center text-gray-500">
-                        暂无打卡记录，快去打卡吧！
-                    </div>
-                `;
-                return;
-            }
-            
-            // 按时间排序，最新的在前
-            const sortedHistory = [...appState.checkedInPlaces].sort((a, b) => new Date(b.date) - new Date(a.date));
-            
-            elements.checkInHistory.innerHTML = sortedHistory.map(record => {
-                const place = checkInPlaces.find(p => p.id === record.id);
-                const date = new Date(record.date);
-                const formattedDate = `${date.getMonth() + 1}月${date.getDate()}日 ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
-                
-                return `
-                    <div class="bg-white rounded-xl shadow-sm p-4 transform transition-all hover:shadow-md">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-semibold">${place.name}</h3>
-                                <p class="text-sm text-gray-500 mt-1">${place.address}</p>
-                            </div>
-                            <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xl">
-                                ${place.stamp}
-                            </div>
-                        </div>
-                        <p class="text-xs text-gray-400 mt-3">打卡时间: ${formattedDate}</p>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // 打卡功能
-        function checkInPlace(placeId) {
-            const place = checkInPlaces.find(p => p.id === placeId);
-            if (!place) return;
-            
-            // 检查是否已经打卡
-            if (appState.checkedInPlaces.some(p => p.id === placeId)) {
-                alert('您已经在这个地点打卡过了！');
-                return;
-            }
-            
-            // 检查是否在打卡范围内（500米）
-            if (appState.userLocation && !appState.userLocation.manual) {
-                const distance = calculateDistance(
-                    appState.userLocation.lat, 
-                    appState.userLocation.lng, 
-                    place.lat, 
-                    place.lng
-                );
-                
-                if (distance > 500) {
-                    alert(`您距离${place.name}太远了（${distance.toFixed(0)}米），请靠近后再打卡！`);
-                    return;
-                }
-            }
-            
-            // 记录打卡
-            const checkInRecord = {
-                id: placeId,
-                date: new Date().toISOString()
-            };
-            
-            appState.checkedInPlaces.push(checkInRecord);
-            localStorage.setItem('checkedInPlaces', JSON.stringify(appState.checkedInPlaces));
-            
-            // 更新UI
-            renderStampCollection();
-            renderCheckInHistory();
-            renderNearbyPlaces();
-            
-            // 显示成功弹窗
-            showSuccessModal(place);
-        }
-
-        // 显示打卡成功弹窗
-        function showSuccessModal(place) {
-            elements.successMessage.textContent = `您已成功在${place.name}打卡，获得一枚新徽章！`;
-            elements.newStampPreview.innerHTML = `
-                <div class="w-20 h-20 rounded-full bg-primary/10 text-primary flex items-center justify-center text-4xl stamp-glow">
-                    ${place.stamp}
-                </div>
-            `;
-            elements.successModal.classList.remove('hidden');
-            
-            // 添加动画效果
-            const modalContent = elements.successModal.querySelector('div');
-            modalContent.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => {
-                modalContent.classList.remove('scale-95', 'opacity-0');
-                modalContent.classList.add('scale-100', 'opacity-100', 'transition-all', 'duration-300');
-            }, 10);
-        }
-
-        // 绑定事件
-        function bindEvents() {
-            // 刷新位置
-            elements.refreshLocation.addEventListener('click', function() {
-                elements.locationInfo.classList.add('hidden');
-                elements.locationStatus.classList.remove('hidden');
-                elements.locationStatus.innerHTML = `
-                    <i class="fa fa-spinner fa-spin mr-2"></i>
-                    <span>正在刷新位置...</span>
-                `;
-                getUserLocation();
-            });
-            
-            // 打卡按钮
-            elements.checkInBtn.addEventListener('click', function() {
-                const placeId = parseInt(this.dataset.placeId);
-                if (placeId) {
-                    checkInPlace(placeId);
-                }
-            });
-            
-            // 关闭成功弹窗
-            elements.closeSuccessModal.addEventListener('click', function() {
-                const modalContent = elements.successModal.querySelector('div');
-                modalContent.classList.remove('scale-100', 'opacity-100');
-                modalContent.classList.add('scale-95', 'opacity-0', 'transition-all', 'duration-300');
-                
-                setTimeout(() => {
-                    elements.successModal.classList.add('hidden');
-                }, 300);
-            });
-            
-            // 帮助按钮
-            elements.helpBtn.addEventListener('click', function() {
-                elements.helpModal.classList.remove('hidden');
-            });
-            
-            // 关闭帮助弹窗
-            elements.closeHelpModal.addEventListener('click', function() {
-                elements.helpModal.classList.add('hidden');
-            });
-            
-            // 点击帮助弹窗背景关闭
-            elements.helpModal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    elements.helpModal.classList.add('hidden');
-                }
-            });
-            
-            // 点击成功弹窗背景关闭
-            elements.successModal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    const modalContent = elements.successModal.querySelector('div');
-                    modalContent.classList.remove('scale-100', 'opacity-100');
-                    modalContent.classList.add('scale-95', 'opacity-0', 'transition-all', 'duration-300');
-                    
-                    setTimeout(() => {
-                        elements.successModal.classList.add('hidden');
-                    }, 300);
+            // 更新内容区域
+            const contentSections = document.querySelectorAll('.content-section');
+            contentSections.forEach((section, index) => {
+                if (index === tabIndex) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
                 }
             });
         }
-
-        // 初始化应用
-        document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
